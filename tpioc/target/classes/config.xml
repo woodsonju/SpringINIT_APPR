@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Ceci est un fichier de configuration Spring -->
+
+<!-- On va dire à Spring quelles sont les classes qu'on souhaite instancier au demarrage de notre 
+     Application en créant des beans -->
+     
+     <bean id="dao" class="fr.dawan.ioc.dao.DaoImpl"></bean>
+     
+	<bean id="metier" class="fr.dawan.ioc.metier.MetierImpl">
+	<!-- Injection de dependance ; Association desobjets métier et dao
+	 property fait appel directement à la méthode setDao 
+	 -->
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+
+</beans>

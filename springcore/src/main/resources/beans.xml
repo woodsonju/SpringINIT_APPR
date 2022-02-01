@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Injection bean par setter name ==> création d'un bean avec pluseirus 
+		noms (identifiants) id ==> un seul nom -->
+	<bean name="formationExcel, formation1" class="fr.dawan.springcore.beans.Formation">
+		<property name="intitule" value="excel" />
+		<property name="duree" value="3" />
+		<property name="prix" value="700.0" />
+		<property name="description" value="Une formation sur excel" />
+	</bean>
+	
+	<!-- 
+		Injection bean par constructeur
+		en ajoutant scope="prototype" ce n'est plus un Singleton
+	 -->
+	 <bean id="formation2"  class="fr.dawan.springcore.beans.Formation" scope="prototype">
+	 	<constructor-arg value="autocad" />
+	 	<constructor-arg type="int" value ="5" />
+	 	<constructor-arg index ="2" value ="2450.0" />
+	 	<!-- <constructor-arg name="description" value="formation autocad" /> -->
+	 	
+	 	<!-- Si on veut qu'il soi null -->
+	 	<constructor-arg name="description"><null/></constructor-arg>
+	 </bean>
+	 
+	 <bean id="adresse1" class="fr.dawan.springcore.beans.Adresse">
+	 	<property name="rue" value="rue capitole" />
+	 	<property name="ville" value="Toulouse" />
+	 	<property name="codePostal" value="31000" />
+	</bean>
+	
+	<bean id="contact1" class="fr.dawan.springcore.beans.Contact">
+		<property name="prenom" value="Marcel"></property>
+		<property name="nom" value="Etienne"></property>
+		<property name="adr" ref="adresse1"></property>
+	</bean>
+	
+	<!-- Le conteneur Spring va établir une liaison entre le bean contact et le bean adresse1 -->
+	<bean id="contact2" class="fr.dawan.springcore.beans.Contact" autowire="byType">
+		<property name="prenom" value="Marcel"></property>
+		<property name="nom" value="Etienne"></property>
+	</bean>
+	
+	<bean id="contact3" class="fr.dawan.springcore.beans.Contact" autowire="constructor" init-method="init" 
+		destroy-method="destroy">
+		<constructor-arg value="Marcel" />
+		<constructor-arg value="Etienne" />
+	</bean>
+	
+	<bean id="contact4" class="fr.dawan.springcore.beans.Contact" autowire="byType" init-method="init" 
+		destroy-method="destroy" abstract="true">
+		<property name="prenom"  value="Marcel" />
+		<property name="nom"  value="Etienne" />
+	</bean>
+	 
+	<bean id="stagiaire1" class="fr.dawan.springcore.beans.Stagiaire" parent="contact4" autowire="byType">
+		<property name="prenom" value="raoul" />
+		<property name="code" value="eti-1233545" />
+	</bean>
+
+</beans>
