@@ -1,4 +1,4 @@
-package fr.dawan.sprincore.beans.test;
+package fr.dawan.springcore.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -47,6 +47,11 @@ public class MainXML {
 		
 		Stagiaire st1 = context.getBean("stagiaire1", Stagiaire.class);
 		System.out.println(st1);
+		
+		Stagiaire stgList = context.getBean("stagiaire2", Stagiaire.class);
+		for(String email: stgList.getEmailList()) {
+			System.out.println(email);
+		}
 		
 		((AbstractApplicationContext) context).close();
 		

@@ -2,6 +2,9 @@ package fr.dawan.springcore.beans;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class Formation implements Serializable{
 	private String intitule; 
 	private int duree;
@@ -53,6 +56,15 @@ public class Formation implements Serializable{
 		this.description = description;
 	}
 	
+	//@PostConstruct  //Appeler juste après l'instanciation
+	public void init() {
+		System.out.println("Methode init");
+	}
+
+	//@PreDestroy // Appeler juste avant la destruction du bean dans le conteneur
+	public void destroy() {
+		System.out.println("Methode destruction");
+	}
 
 	@Override
 	public String toString() {

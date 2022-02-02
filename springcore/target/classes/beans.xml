@@ -61,4 +61,26 @@
 		<property name="code" value="eti-1233545" />
 	</bean>
 
+	<bean id="contacts" class="fr.dawan.springcore.beans.Contact" autowire="byType">
+		<property name="prenom" value="Marcel"></property>
+		<property name="nom" value="Etienne"></property>
+		<property name="emailList">
+			<list>
+				<value>aaaaa@aaaa.fr</value>
+				<value>bbb@bbb.fr</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="stagiaire2" class="fr.dawan.springcore.beans.Stagiaire" parent="contacts" autowire="byType">
+		<property name="prenom" value="Raoul" />
+		<property name="code" value="eti-1235445"/>
+		<property name="emailList">
+			<list merge="true">  <!-- Avec merge il ajoute au précedent, il ecrase pas ce qu'il y avait déjà --> 
+				<value>yyy@yyy.fr</value>
+				<value>xxx@xxx.fr</value>
+			</list>
+		</property>
+	</bean>
+
 </beans>
