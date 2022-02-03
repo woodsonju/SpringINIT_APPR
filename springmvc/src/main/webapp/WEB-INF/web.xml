@@ -9,11 +9,21 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
+	<!--ContextLoaderListener permet de faire l'injection de dependance
+		Le ContextLoaderListener par defaut va chercher le fichier de configuration  root-context.xml
+		Ce fichier va contenir les beans (les objets)
+	  -->
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+<!-- 
+	Pour la partie Spring MVC, on declare le DispatcherServlet, qui fonctionne comme un contrôleur 
+	frontal. Il traite la requête en entrée, et l'envoie ensuite vers le bon contrôleur
+	
+	Il aussi un fichier de configuration qui se sonne servlet-context.xml
+ -->
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>

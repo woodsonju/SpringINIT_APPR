@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,8 @@ import fr.dawan.springmvc.beans.User;
 @Repository
 public class UserDaoImpl implements IUserDAO{
 
+	//Dans la méthode getLogger, on va specifier la classe à partir de laquelle on va logger
+	private static Logger myRootLogger = LogManager.getLogger(UserDaoImpl.class);
 	
 	/*
 	 * Pour gérer la gestion des entités j'aurais besoin de créer un variable 
@@ -27,6 +31,8 @@ public class UserDaoImpl implements IUserDAO{
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	
 	
 	@Transactional
 	@Override
@@ -68,14 +74,17 @@ public class UserDaoImpl implements IUserDAO{
 			entityManager.remove(user);
 		} else {
 			//TODO Logger
+			myRootLogger.info("L'utilisateur n'existe pas dans l'application");
 		}
-		
 	}
 
 	@Override
 	public User getUserByPasswordAndUEmail(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT u from User where u.email=: x and u.password=: y";
+		Query req = entityManager.createQuery(sql);
+		req.setParameter("x", email);
+		req.setParameter("y", password);
+		return (User) req.getSingleResult();
 	}
 
 }
