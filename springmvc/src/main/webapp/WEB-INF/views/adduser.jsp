@@ -20,7 +20,7 @@
 		path  : La données qui va être saisie, correspond à un attribut de la classe	
 		path="prenom" fait appel au getter(getPrenom())		
 	-->
-	<f:form method="post" action="${urladd}" modelAttribut="formuser">
+	<f:form method="post" action="${urladd}" modelAttribute="formuser">
 		<div class="form-group">
 			<div class="offset-md-2 col-md-8 mt-2">
 				<f:label path="prenom">Prénom</f:label>
