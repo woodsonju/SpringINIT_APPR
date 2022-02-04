@@ -1,13 +1,7 @@
-<%@taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" context="/springmvc"/>">
-<title>Insert title here</title>
-</head>
-<body>
+
+<c:import url="header.jsp"/>
 	<c:url value="/login" context="/springmvc" var="urllogin" />
 
 	<f:form method="post" action="${urllogin}" modelAttribute="formlogin">
@@ -32,5 +26,5 @@
 				style="margin-top: 20px">Connexion</button>
 		</div>
 	</f:form>
-</body>
-</html>
+	
+<c:import url="footer.jsp"/>

@@ -1,14 +1,8 @@
-<%@taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" context="/springmvc"/>">
-<title>Insert title here</title>
-</head>
-<body>
+<c:import url="header.jsp"/>
+
 	<c:url value="/admin/users/add" context="/springmvc" var="urladd" />
 	<!-- modelAttribut :Les données que je vais saisir ici, seront stockés 
 						dans cette  formuser. 
@@ -54,5 +48,5 @@
 			<button type="submit" class="btn btn-success btn-lg btn-block" style="margin-top: 20px" >Ajouter</button>
 		</div>
 	</f:form>
-</body>
-</html>
+	
+	<c:import url="footer.jsp" />
