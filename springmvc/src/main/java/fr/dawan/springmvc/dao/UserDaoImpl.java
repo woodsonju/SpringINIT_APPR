@@ -80,7 +80,7 @@ public class UserDaoImpl implements IUserDAO{
 
 	@Override
 	public User getUserByPasswordAndUEmail(String email, String password) {
-		String sql = "SELECT u from User where u.email=: x and u.password=: y";
+		String sql = "SELECT u from User u where u.email=: x and u.password=: y";
 		Query req = entityManager.createQuery(sql);
 		req.setParameter("x", email);
 		req.setParameter("y", password);
