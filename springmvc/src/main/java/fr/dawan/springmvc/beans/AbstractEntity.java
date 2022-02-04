@@ -9,8 +9,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 /*
- * @MappedSuperclass  : Dans ce cas la classe n'est pas une entité JPA, mais ses champs seront enregistrés 
- * 						en base.
+ * @MappedSuperclass  : Dans ce cas la classe n'est pas une entité JPA, mais ses champs 
+ * 						seront enregistrés en base.
  */
 @MappedSuperclass
 public class AbstractEntity implements Serializable{

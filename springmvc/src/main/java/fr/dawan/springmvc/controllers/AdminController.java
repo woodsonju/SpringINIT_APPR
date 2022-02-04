@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.dawan.springmvc.beans.User;
+import fr.dawan.springmvc.form.FormUser;
 import fr.dawan.springmvc.service.IUserService;
 
 @Controller
@@ -51,9 +52,21 @@ public class AdminController {
 		return "redirect:/admin/users";
 	}
 	
-//	public String addUser(Model model) {
-//		model.addAttribute("formuser", )
-//	}
+	/*
+	 * Le Model permet de fournir des attributs utilisés dans la vue grace 
+	 * à la méthode addAtribute
+	 * 
+	 * Si on veut afficher un formulaire avec données par defaut (vide) il suffit 
+	 * d'acceder à la méthode addAtribute, et ajouter un attribut formuser 
+	 * dont sa valeur est  new FormUser()
+	 * Ensuite la vue va se servir de l'attribut pour acceder à sa valeur (ici new FormUser())
+	 * 
+	 */
+	@GetMapping("/users/add")
+	public String addUser(Model model) {
+		model.addAttribute("formuser", new FormUser());
+		return "addUser";
+	}
 	
 	
 }

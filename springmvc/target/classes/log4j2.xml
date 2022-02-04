@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO">
+	<!-- Appender : support de logs (console, fichier, bdd,...) -->
+	<Appenders>
+		<!-- appender pour écrire dans la console -->
+		<Console name="myConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<!-- 
+		appender RollingFile pour écrire dans un fichier avec une rotation mixte : 1 fichier 
+			par jour, on conserve les 10 derniers le fichier a une taille maximale de 
+			100Mo -->
+		<RollingFile name="myRollingFileAppender"
+			fileName="app.log" filePattern="app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<RollingFile name="myErrorFileAppender"
+			fileName="error.log" filePattern="app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+		<!-- logger principal qui écrira à la fois dans la console et dans le fichier 
+			app.log -->
+		<Root level="info">
+			<AppenderRef ref="myConsoleAppender" />
+			<AppenderRef ref="myRollingFileAppender" />
+		</Root>
+
+		<!-- un autre logger qui concernera uniquement les errors -->
+		<Logger name="myErrorLogger" level="error" additivity="false">
+			<AppenderRef ref="myErrorFileAppender" />
+		</Logger>
+		
+		 <!-- Log everything in hibernate -->
+    <Logger name="org.hibernate" level="info" additivity="false">
+      <AppenderRef ref="myConsoleAppender" />
+    </Logger>
+
+    <!-- Log SQL statements -->
+    <Logger name="org.hibernate.SQL" level="info" additivity="false">
+      <AppenderRef ref="myConsoleAppender" />
+    </Logger>
+
+    <!-- Log JDBC bind parameters -->
+    <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">
+      <AppenderRef ref="myConsoleAppender" />
+    </Logger>
+
+
+	</Loggers>
+</Configuration>
